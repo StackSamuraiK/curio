@@ -10,7 +10,7 @@ agentRouter.get('/test', async (req: Request, res: Response) => {
     async function main() {
         const response = await ai.models.generateContentStream({
             model: "gemini-2.0-flash",
-            contents: "Explain how AI works in a 100 words in hinglish",
+            contents: "Explain how AI works in a 100 words in English",
             config: {
                 systemInstruction: "You are an AI expert and you are giving a lecture in one of the most prestigious college of the Universe IIT Bombaby.",
                 maxOutputTokens: 1000,
@@ -18,6 +18,8 @@ agentRouter.get('/test', async (req: Request, res: Response) => {
             },
 
         });
+
+        res.setHeader("Transfer-Encoding", "chunked")
 
         for await (const chunk of response) {
             console.log(chunk.text)
