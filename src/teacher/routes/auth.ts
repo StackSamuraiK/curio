@@ -56,49 +56,64 @@ authRouter.post('/signup', async (req: Request, res: Response) => {
             token: token
         });
     } catch (error: any) {
-        return error
+        console.error("Signup error:", error);
+
+        return res.status(500).json({
+            msg: "Internal server error",
+            ...(process.env.NODE_ENV === 'development' && { error: error.message })
+        });
     }
 });
 
 //@ts-ignore
-authRouter.post('/signin' , async (req:Request , res:Response) => {
-    const result = TeacherSigninSchema.safeParse(req.body)
+authRouter.post('/signin', async (req: Request, res: Response) => {
+    try {
 
-    if(!result.success){
-        return res.status(400).json({
-            msg:"Invalid Input",
-            error: result.error.format()
-        });
-    }
+        const result = TeacherSigninSchema.safeParse(req.body)
 
-    const teacher = await prisma.teacher.findFirst({
-        where:{
-            email: req.body.email
+        if (!result.success) {
+            return res.status(400).json({
+                msg: "Invalid Input",
+                error: result.error.format()
+            });
         }
-    });
 
-    const validatePassword = bcrypt.compare(req.body.password , teacher?.password || "")
+        const teacher = await prisma.teacher.findFirst({
+            where: {
+                email: req.body.email
+            }
+        });
 
-    if(!teacher){
-        return res.status(400).json({
-            msg:"The email is not registered"
+        const validatePassword = bcrypt.compare(req.body.password, teacher?.password || "")
+
+        if (!teacher) {
+            return res.status(400).json({
+                msg: "The email is not registered"
+            });
+        }
+
+        if (!validatePassword) {
+            return res.status(400).json({
+                msg: "Incorrect Password"
+            });
+        }
+
+        const teacher_id = teacher.teacher_id
+
+        const token = jwt.sign({ teacher_id }, process.env.JWT_SECRET || "")
+        res.status(200).json({
+            msg: "Teacher Logged in successfully",
+            body: teacher,
+            token: token
+        });
+    } catch (error: any) {
+        console.error("Signup error:", error);
+
+        return res.status(500).json({
+            msg: "Internal server error",
+            ...(process.env.NODE_ENV === 'development' && { error: error.message })
         });
     }
-
-    if(!validatePassword){
-        return res.status(400).json({
-            msg: "Incorrect Password"
-        });
-    }
-
-    const teacher_id = teacher.teacher_id
-
-    const token = jwt.sign({teacher_id} , process.env.JWT_SECRET || "")
-     res.status(200).json({
-        msg: "Teacher Logged in successfully",
-        body: teacher,
-        token: token
-     });
 });
 
 export default authRouter;

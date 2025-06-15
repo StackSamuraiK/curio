@@ -57,7 +57,12 @@ authRouter.post('/signup', async (req: Request, res: Response) => {
             token: token
         })
     } catch (error: any) {
-        return error
+        console.error("Signup error:", error);
+    
+        return res.status(500).json({
+            msg: "Internal server error",
+            ...(process.env.NODE_ENV === 'development' && { error: error.message })
+        });
     }
 });
 
@@ -99,12 +104,17 @@ authRouter.post('/signin', async (req: Request, res: Response) => {
         const token = jwt.sign({ student_id }, process.env.JWT_SECRET || "")
 
         res.status(200).json({
-            msg: "User Logged in successfully",
+            msg: "Student Logged in successfully",
             body: student,
             token: token
         });
     } catch (error: any) {
-        return error
+       console.error("Signup error:", error);
+    
+        return res.status(500).json({
+            msg: "Internal server error",
+            ...(process.env.NODE_ENV === 'development' && { error: error.message })
+        });
     }
 });
 
