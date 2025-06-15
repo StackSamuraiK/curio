@@ -15,10 +15,12 @@
   "dependencies": {
     "@google/genai": "^0.13.0",
     "@prisma/client": "^6.7.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.18",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
