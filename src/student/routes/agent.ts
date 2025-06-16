@@ -1,8 +1,8 @@
 import { GenerateContentResponse, GoogleGenAI } from "@google/genai";
-import expresd from "express"
+import express from "express"
 import { Request, Response } from "express";
 
-const agentRouter = expresd.Router()
+const agentRouter = express.Router()
 
 agentRouter.get('/test', async (req: Request, res: Response) => {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API });
