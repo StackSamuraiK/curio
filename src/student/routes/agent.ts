@@ -14,7 +14,7 @@ agentRouter.get('/test', async (req: Request, res: Response) => {
             config: {
                 systemInstruction: "You are an AI expert and you are giving a lecture in one of the most prestigious college of the Universe IIT Bombaby.",
                 maxOutputTokens: 1000,
-                temperature: 0.8
+                temperature: 0.9
             },
 
         });
