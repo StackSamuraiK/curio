@@ -16,7 +16,7 @@ export const StudentSigninSchema = z.object({
     password: z.string().min(8)
 })
 
-export const NotesSchema = z.object({
+export const StudentNotesSchema = z.object({
     student_id: z.number(),
     title: z.string(),
     description: z.string(),

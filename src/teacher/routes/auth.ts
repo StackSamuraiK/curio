@@ -4,11 +4,12 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { TeacherSigninSchema, TeacherSignupSchema } from "../../types/teacher-types";
+import { uploadImageOnly } from "../../middlewares/upload";
 
 const authRouter = express.Router()
 
 //@ts-ignore
-authRouter.post('/signup', async (req: Request, res: Response) => {
+authRouter.post('/signup', uploadImageOnly ,async (req: Request, res: Response) => {
     try {
         const result = TeacherSignupSchema.safeParse(req.body)
 

@@ -39,6 +39,7 @@ model Teacher {
   updated_at DateTime @default(now()) @db.Timestamp()
 
   video_detail Video_Details[]
+  notes        Notes[]
 }
 
 model Video_Details {
@@ -56,13 +57,15 @@ model Video_Details {
 
 model Notes {
   id          Int      @id @default(autoincrement())
-  student_id  Int
+  student_id  Int?
+  teacher_id  Int?
   title       String
   description String
   url         String
   created_at  DateTime @default(now()) @db.Timestamp()
   updated_at  DateTime @default(now()) @db.Timestamp()
-  
+
   //Relation
-  student     Student  @relation(fields: [student_id], references: [student_id], onDelete: Cascade)
+  student Student? @relation(fields: [student_id], references: [student_id], onDelete: Cascade)
+  teacher Teacher? @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade)
 }
