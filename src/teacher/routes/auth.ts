@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { TeacherSigninSchema, TeacherSignupSchema } from "../../types/teacher-types";
-import { uploadImageOnly } from "../../middlewares/upload";
+import { uploadImageOnly } from "../../student/middlewares/upload";
 
 const authRouter = express.Router()
 

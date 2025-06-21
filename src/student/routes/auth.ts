@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 import { StudentSigninSchema, StudentSignupSchema } from "../../types/student-types";
 import prisma from "../../db";
 import bcrypt from "bcrypt"
-import { uploadImageOnly } from "../../middlewares/upload";
+import { uploadImageOnly } from "../middlewares/upload";
 
 const authRouter = express.Router()
 

@@ -27,5 +27,5 @@ export const TeacherNotesSchema = z.object({
     student_id: z.number(),
     title: z.string(),
     description: z.string(),
-    url: z.string(),
+    file: z.string(),
 });

@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "src/generated/prisma/client"
 }
 
 datasource db {
@@ -61,7 +62,7 @@ model Notes {
   teacher_id  Int?
   title       String
   description String
-  url         String
+  file        String
   created_at  DateTime @default(now()) @db.Timestamp()
   updated_at  DateTime @default(now()) @db.Timestamp()
 
