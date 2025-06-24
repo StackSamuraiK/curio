@@ -24,8 +24,8 @@ export const VideoDetailSchema = z.object({
 });
 
 export const TeacherNotesSchema = z.object({
-    student_id: z.number(),
-    title: z.string(),
-    description: z.string(),
-    file: z.string(),
+  teacher_id: z.string().transform(val => parseInt(val)),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  pdf: z.string().optional()
 });

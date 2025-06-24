@@ -157,7 +157,7 @@ export const uploadPDFOnly = (req: Request, res: Response, next: NextFunction): 
 
   const pdfUpload = multer({
     storage: storage,
-    limits: { fileSize: 1024 * 1024 * 10 }, // 10MB for PDFs
+    limits: { fileSize: 1024 * 1024 * 10 },
     fileFilter: pdfOnlyFilter
   });
 

@@ -154,12 +154,23 @@ exports.Prisma.Video_DetailsScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.NotesScalarFieldEnum = {
+exports.Prisma.Student_NotesScalarFieldEnum = {
   id: 'id',
   student_id: 'student_id',
+  title: 'title',
+  description: 'description',
+  pdf: 'pdf',
+  file: 'file',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Teacher_NotesScalarFieldEnum = {
+  id: 'id',
   teacher_id: 'teacher_id',
   title: 'title',
   description: 'description',
+  pdf: 'pdf',
   file: 'file',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -185,7 +196,8 @@ exports.Prisma.ModelName = {
   Student: 'Student',
   Teacher: 'Teacher',
   Video_Details: 'Video_Details',
-  Notes: 'Notes'
+  Student_Notes: 'Student_Notes',
+  Teacher_Notes: 'Teacher_Notes'
 };
 
 /**

@@ -10,6 +10,8 @@ const notesRouter = express.Router();
 notesRouter.post('/create', uploadPDFOnly, async (req: Request, res: Response) => {
     try {
         console.log(req.body)
+        console.log('Body before processing:', req.body);
+        console.log('Uploaded file:', req.file);
         const result = TeacherNotesSchema.safeParse(req.body)
 
 
@@ -20,14 +22,15 @@ notesRouter.post('/create', uploadPDFOnly, async (req: Request, res: Response) =
             });
         }
 
-        const notes = await prisma.notes.create({
-            data: {
-                teacher_id: req.body.teacher_id,
-                title: req.body.title,
-                description: req.body.description,
-                file: req.body.file, //To be fixed
+        const notes = await prisma.teacher_Notes.create({
+            data:{
+                teacher_id:req.body.teacher_id,
+                title:req.body.title,
+                description:req.body.description,
+                pdf:req.body.pdf,
+                file: req.body.file
             }
-        });
+        })
 
         res.status(200).json({
             msg: "Notes uploaded successfully",
@@ -41,5 +44,7 @@ notesRouter.post('/create', uploadPDFOnly, async (req: Request, res: Response) =
         });
     }
 });
+
+
 
 export default notesRouter;
