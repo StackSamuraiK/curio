@@ -41,7 +41,7 @@ notesRouter.post('/create', uploadPDFOnly, async (req: Request, res: Response) =
         return res.status(500).json({
             msg: "Internal server error",
             ...(process.env.NODE_ENV === 'development' && { error: e.message })
-        });
+        })
     }
 });
 
